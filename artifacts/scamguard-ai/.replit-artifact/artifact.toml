@@ -1,0 +1,24 @@
+kind = "mobile"
+previewPath = "/scamguard-ai/"
+title = "ScamGuard AI"
+description = "An offline-first mobile safety assistant that assesses suspicious links and messages, explains scam trends, preserves scan history, and includes a playable ScamGuard Bird mini game."
+version = "1.0.0"
+id = "artifacts/scamguard-ai"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/scamguard-ai/" ]
+localPort = 23877
+
+[services.development]
+run = "pnpm --filter @workspace/scamguard-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/scamguard-ai", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/scamguard-ai", "run", "serve" ]
+
+[services.env]
+PORT = "23877"
+BASE_PATH = "/scamguard-ai/"

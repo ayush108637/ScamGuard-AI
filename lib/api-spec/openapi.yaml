@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: scam-trends
+    description: Curated cyber-safety advisories
 paths:
   /healthz:
     get:
@@ -24,6 +26,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /scam-trends:
+    get:
+      operationId: getScamTrends
+      tags: [scam-trends]
+      summary: Get the curated scam advisory database
+      description: Returns updateable advisories curated from official Indian cyber-safety sources.
+      responses:
+        "200":
+          description: Scam advisory database
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScamTrendsResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +48,50 @@ components:
           type: string
       required:
         - status
+    ScamTrend:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        severity:
+          type: string
+          enum: [high, medium]
+        summary:
+          type: string
+        howItWorks:
+          type: string
+        warningSigns:
+          type: array
+          items:
+            type: string
+        whatToDo:
+          type: string
+        source:
+          type: string
+      required:
+        - id
+        - name
+        - severity
+        - summary
+        - howItWorks
+        - warningSigns
+        - whatToDo
+        - source
+    ScamTrendsResponse:
+      type: object
+      properties:
+        trends:
+          type: array
+          items:
+            $ref: "#/components/schemas/ScamTrend"
+        sourceLabel:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - trends
+        - sourceLabel
+        - updatedAt
 

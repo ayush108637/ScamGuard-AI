@@ -1,10 +1,11 @@
-# [Project name]
+# ScamGuard AI
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+ScamGuard AI is an offline-first Expo mobile app for assessing suspicious links and messages, learning current scam patterns, and practicing awareness safely.
 
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/scamguard-ai run dev` — run the Expo mobile preview
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
@@ -22,15 +23,26 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/scamguard-ai/app/(tabs)/index.tsx` — mobile screens, navigation, and the offline game
+- `artifacts/scamguard-ai/src/lib/analyze.ts` — local link and message risk rules
+- `artifacts/scamguard-ai/src/context/AppContext.tsx` — AsyncStorage-backed history, trends, and connectivity state
+- `artifacts/scamguard-ai/src/data/scams.ts` — locally stored scam-trend database
+- `artifacts/api-server/src/routes/scam-trends.ts` — trusted-backend trend update endpoint
+- `lib/api-spec/openapi.yaml` — API contract source of truth
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Scans run locally first so link and message assessment, history, and the game continue to work without internet.
+- Screenshot selection is real through the phone gallery, but the UI explicitly reports when OCR/image analysis is unavailable instead of inventing a result.
+- Scam trends use a local fallback and a generated API hook for a trusted backend refresh; offline state is always visible.
+- Scan history is capped at the 50 most recent items and stored only on-device with AsyncStorage.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Home quick checks for links, messages, screenshots, current trends, history, and ScamGuard Bird.
+- Local risk levels and reasons for suspicious indicators, with safety guidance and official reporting links.
+- Expandable scam-trend advisories for digital arrest, investment, fake jobs, phishing, fake KYC, messaging, APK, RTO, courier, support, UPI, refund, and AI impersonation scams.
+- Cyber Crime Helpline 1930 and the official cybercrime.gov.in portal are available from the emergency section.
 
 ## User preferences
 
