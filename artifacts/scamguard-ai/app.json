@@ -10,7 +10,14 @@
     "ios": {
       "supportsTablet": false
     },
-    "android": {},
+    "android": {
+      "package": "com.scamguardai.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#07131F"
+      }
+    },
     "web": {
       "favicon": "./assets/images/icon.png"
     },

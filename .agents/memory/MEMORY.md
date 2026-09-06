@@ -1,0 +1,1 @@
+- [Android build environment](android-build-environment.md) — native APK compilation needs JDK and Android SDK outside the current workspace.
